@@ -34,7 +34,7 @@ partnerRouter.route('/')
     .then(response => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
-        res.json(partner);
+        res.json(response);
     })
     .catch(err => next(err));
 });
