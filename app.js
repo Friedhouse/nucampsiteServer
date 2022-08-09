@@ -12,6 +12,7 @@ var usersRouter = require('./routes/users');
 const campsiteRouter = require('./routes/campsiteRouter');
 const promotionRouter = require('./routes/promotionRouter');
 const partnerRouter = require('./routes/partnerRouter');
+const uploadRouter = require('./routes/uploadRouter');
 
 
 var app = express();
@@ -39,6 +40,7 @@ app.use(passport.initialize());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/imageUpload', uploadRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
