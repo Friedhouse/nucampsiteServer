@@ -3,7 +3,6 @@ const User = require('../models/user');
 const passport = require('passport');
 const authenticate = require('../authenticate');
 const cors = require('./cors');
-
 const router = express.Router();
 
 /* GET users listing. */
@@ -50,11 +49,21 @@ router.post('/signup', cors.corsWithOptions, (req, res) => {
     });
 });
 
+router.get('/facebook/token', passport.authenticate('facebook-token'), (req, res) => {
+    if (req.user) {
+        const token = authenticate.getToken({_id: req.user._id});
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({success: true, token: token, status: 'You are successfully logged in!'});
+    }
+});
+
 router.post('/login', passport.authenticate('local'), cors.corsWithOptions,  (req, res) => {
     const token = authenticate.getToken({_id: req.user._id});
     res.statusCode = 200;
 	res.setHeader('Content-Type', 'application/json');
 	res.json({success: true, token: token, status: 'You are successfully logged in!'});
+    console.log(token);
 });
 
 router.get('/logout', cors.corsWithOptions, (req, res, next) => {
