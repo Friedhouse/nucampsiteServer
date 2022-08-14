@@ -1,9 +1,10 @@
 const express = require('express');
-const campsiteRouter = express.Router();
 const Campsite = require('../models/campsite');
 const authenticate = require('../authenticate');
 const mongoose = require('mongoose');
 const cors = require('./cors');
+
+const campsiteRouter = express.Router();
 
 //New route for campsite
 campsiteRouter.route('/')
